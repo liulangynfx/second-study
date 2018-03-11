@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rainea.ssm.mapper.ItemsMapperCustome" >
+
+	<!-- 查询片段 -->
+	<sql id="listItems_where">
+		<if test="itemsCustome != null">
+			<if test="itemsCustome.name != null and itemsCustome.name !=''">
+				name like '%${itemsCustome.name}%'
+			</if>
+		</if>
+		
+	</sql>
+
+	<!-- 查询商品 -->
+ 	<select id="listItems" parameterType="com.rainea.ssm.po.ItemQueryVo" resultType="com.rainea.ssm.po.ItemsCustome">
+ 		select * from items
+ 		<where>
+ 			<include refid="listItems_where"></include>
+ 		</where>
+ 	</select>
+</mapper>

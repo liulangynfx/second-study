@@ -1,0 +1,107 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
+		
+		<!-- 注解处理器 -->
+<!-- 		<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean> -->
+		
+		<!-- 注解适配器 -->
+<!-- 		<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"></bean> -->
+		
+		<!-- 替代上面两行 -->
+		<mvc:annotation-driven conversion-service="conversionService" validator="localValidator"></mvc:annotation-driven>
+		
+		<!-- 配置静态资源的解析 -->
+		<mvc:resources location="/js/" mapping="/js/**"/>
+		<mvc:resources location="/css/" mapping="/css/**"/>
+		
+		<!-- 拦截器的全局配置 -->
+		<mvc:interceptors>
+			<mvc:interceptor>
+				<!-- 拦截所有url包括子url -->
+				<mvc:mapping path="/**"/>
+				<bean class="com.rainea.ssm.interceptor.AuthInterceptor"></bean>
+			</mvc:interceptor>
+			<mvc:interceptor>
+				<!-- 拦截所有url包括子url -->
+				<mvc:mapping path="/**"/>
+				<bean class="com.rainea.ssm.interceptor.CusInterceptor1"></bean>
+			</mvc:interceptor>
+			<mvc:interceptor>
+				<!-- 拦截所有url包括子url -->
+				<mvc:mapping path="/**"/>
+				<bean class="com.rainea.ssm.interceptor.CusInterceptor2"></bean>
+			</mvc:interceptor>
+		</mvc:interceptors>
+
+		<!-- 注解的controller配置 -->
+<!-- 		<bean class="com.rainea.ssm.controller.ItemController" /> -->
+		
+		<!-- 自动扫描 -->
+		<context:component-scan base-package="com.rainea.ssm.controller"></context:component-scan> 
+		
+		
+		<!-- 视图解析器 -->
+		<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
+			<property name="prefix" value="/WEB-INF/jsp/" />
+			<property name="suffix" value=".jsp"/>
+		</bean>	
+		
+		<!-- 日期转换器 -->
+		<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+			<property name="converters">
+				<list>
+					<bean class="com.rainea.ssm.converter.CustomeDateConverter"></bean>
+				</list>
+			</property>
+		</bean>
+		
+		<!-- 校验器 -->
+		<bean id="localValidator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+			<!-- 校验器 -->
+			<property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+			<!-- 配置文件 -->
+			<property name="validationMessageSource" ref="messageSource"></property>
+		</bean>
+		
+		<!-- 校验错误信息配置文件 -->
+		<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+			<property name="basenames">
+				<list>
+					<value>customeValidateMsg</value>
+				</list>
+			</property>
+			<!-- 资源文件编码格式(此配置视频中配置错误，应该为property格式) -->
+			<property name="fileEncodings">
+				<props>
+					<prop key="classpath:customeValidateMsg">utf-8</prop>
+				</props>
+			</property>
+			<!-- 对资源文件内容缓存时间，单位秒 -->
+			<property name="CacheSeconds" value="120"></property>
+		</bean>
+		
+		<!-- 自定义异常处理器类 -->
+		<bean class="com.rainea.ssm.exception.CustomeExceptionResolver" />
+		
+		<!-- 文件上传 -->
+		<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+			<!-- 设置最大上传限制为5M -->
+			<property name="maxUploadSize">
+				<value>50000000</value>
+			</property>
+		</bean>
+		
+		
+</beans>
