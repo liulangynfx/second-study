@@ -3,6 +3,8 @@ package com.rainea.ssm.service.impl;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.rainea.ssm.exception.CustomeException;
@@ -12,6 +14,7 @@ import com.rainea.ssm.po.ItemQueryVo;
 import com.rainea.ssm.po.Items;
 import com.rainea.ssm.po.ItemsCustome;
 import com.rainea.ssm.service.ItemService;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
 
 /**
  * <p>Title: ItemServiceImpl.java</p>
