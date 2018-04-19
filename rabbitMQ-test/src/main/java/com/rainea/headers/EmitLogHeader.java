@@ -1,4 +1,4 @@
-package com.rainea;
+package com.rainea.headers;
 
 import com.rabbitmq.client.*;
 
