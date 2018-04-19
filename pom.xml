@@ -13,6 +13,8 @@
         <module>Nio-test</module>
         <module>springmvc-test</module>
         <module>java-basic</module>
+        <module>fastjson-test</module>
+        <module>rabbitMQ-test</module>
     </modules>
 
     <dependencies>
