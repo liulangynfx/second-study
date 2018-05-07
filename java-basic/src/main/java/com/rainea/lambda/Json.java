@@ -1,4 +1,4 @@
-package com.rainea.json;
+package com.rainea.lambda;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -24,7 +24,12 @@ public class Json {
 //        Json.testJSONStrToJSONObject();
 
 
+//        Student student = JSONObject.parseObject(JSON_OBJ_STR, Student.class);
+//
+//        System.out.println(student);
 
-        System.out.println(JSONObject.parseObject(JSON_OBJ_STR, Student.class));
+        JSONObject jsonObject = JSONObject.parseObject(JSON_OBJ_STR);
+        jsonObject.put("ttt", true);
+        System.out.println(jsonObject.toJSONString());
     }
 }
