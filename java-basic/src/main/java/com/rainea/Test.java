@@ -7,11 +7,8 @@ public class Test {
         int d1;
         int d2;
         int d3;
-<<<<<<< HEAD
         int d4;
         int m1;
-=======
         int m2;
->>>>>>> m2
     }
 }
