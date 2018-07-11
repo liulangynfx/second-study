@@ -10,5 +10,6 @@ public class Test {
         int d4;
         int m1;
         int m2;
+        int m3;
     }
 }
