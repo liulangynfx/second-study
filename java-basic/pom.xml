@@ -11,5 +11,13 @@
 
     <artifactId>java-basic</artifactId>
 
+    <dependencies>
+        <dependency>
+                <groupId>com.easybike</groupId>
+                <artifactId>task-Common-module</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 
 </project>
